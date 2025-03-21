@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резюме - {{ name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>{{ name }}</h1>
+            <p class="subtitle">Резюме студента</p>
+        </header>
+
+        <section class="about">
+            <h2>О себе</h2>
+            <p>
+                Привет! Меня зовут {{ name }}. Я студент университета ВШЭ, имею образование оператора ЭВМ и активно участвую в олимпиадах и хакатонах. 
+                Мой GitHub: <a href="{{ github }}" target="_blank">{{ github }}</a>. 
+                Вы можете связаться со мной по email: <a href="mailto:{{ email }}">{{ email }}</a>.
+            </p>
+        </section>
+
+        <section class="achievements">
+            <h2>Достижения</h2>
+            <ul>
+                {% for achievement in achievements %}
+                <li>{{ achievement }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="github">
+            <h2>GitHub</h2>
+            {% if github_data %}
+                <p>Количество репозиториев: {{ github_data.public_repos }}</p>
+                <p>Подписчики: {{ github_data.followers }}</p>
+            {% else %}
+                <p>Данные GitHub не загружены.</p>
+            {% endif %}
+        </section>
+
+        <footer>
+            <p>© {{ name }}, 2025</p>
+        </footer>
+    </div>
+</body>
+</html>
